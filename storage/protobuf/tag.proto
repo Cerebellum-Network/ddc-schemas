@@ -4,7 +4,15 @@ package pb;
 
 option go_package = "/pb";
 
+/**
+ * A tag is an attribute attached to pieces.
+ * Tags can be used to search or filter pieces in storage.
+ *
+ * Specific tags are used to implement different higher protocols, such as a file system.
+ */
 message Tag {
+  // The key of the tag.
   string key  = 1;
+  // The value of the tag for this key.
   string value = 2;
 }

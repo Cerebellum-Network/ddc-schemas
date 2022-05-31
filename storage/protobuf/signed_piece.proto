@@ -8,11 +8,12 @@ import "signature.proto";
 option go_package = "/pb";
 
 /**
- * A piece signed by the account that uploaded the piece.
+ * A piece signed by an account.
+ * This can be used to verify the intent of the account holder to upload the piece.
  */
 message SignedPiece {
   // A piece.
   Piece     piece     = 1;
-  // A signature of the piece by a keypair.
+  // A signature of the piece by the keypair of the uploader.
   Signature signature = 2;
 }

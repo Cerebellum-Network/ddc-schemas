@@ -6,6 +6,10 @@ import "signed_piece.proto";
 
 option go_package = "/pb";
 
+/**
+ * A search result contains the pieces found from a search.
+ */
 message SearchResult {
+  // The list of pieces found in storage.
   repeated SignedPiece signedPieces = 1;
 }
