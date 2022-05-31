@@ -4,9 +4,17 @@ package pb;
 
 option go_package = "/pb";
 
+/**
+ * A signature and details to help verifying it.
+ */
 message Signature {
+  // A cryptographic signature.
   string value         = 1;
+  // The public key of the signer.
   string signer        = 2;
+  // The name of the signature scheme (sr25519, secp256k1, ed25519).
   string scheme        = 3;
+  // The ID of the hashing algorithm as per multiformats/multicodec.
+  // Default: 0, meaning blake2b-256.
   uint64 multiHashType = 4;
 }

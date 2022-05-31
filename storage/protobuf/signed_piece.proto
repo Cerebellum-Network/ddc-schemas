@@ -7,7 +7,12 @@ import "signature.proto";
 
 option go_package = "/pb";
 
+/**
+ * A piece signed by the account that uploaded the piece.
+ */
 message SignedPiece {
+  // A piece.
   Piece     piece     = 1;
+  // A signature of the piece by a keypair.
   Signature signature = 2;
 }

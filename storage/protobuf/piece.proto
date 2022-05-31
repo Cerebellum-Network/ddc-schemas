@@ -7,9 +7,16 @@ import "tag.proto";
 
 option go_package = "/pb";
 
+/**
+ * A piece is the unit of data that is stored in DDC.
+ */
 message Piece {
+  // The opaque payload carried by the piece.
   bytes         data     = 1;
+  // The ID of a bucket that contains the piece.
   uint32        bucketId = 2;
+  // A list of tags with which the piece may be searched.
   repeated Tag  tags     = 3;
+  // A list of links to other pieces.
   repeated Link links    = 4;
 }
