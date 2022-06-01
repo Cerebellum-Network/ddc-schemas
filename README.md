@@ -15,7 +15,9 @@
     PROJECT=storage
     
     docker run --rm                                 \
-        -v $PWD/build/docs:/out                     \
+        -v $PWD/build/tmp:/out                     \
         -v $PWD/$PROJECT/protobuf:/protos           \
         pseudomuto/protoc-gen-doc:1.5               \
             --doc_opt=markdown,$PROJECT-protobuf.md
+
+    cat storage/README.md storage/CHANGELOG.md build/tmp/storage-protobuf.md > build/docs/storage-schema.md
