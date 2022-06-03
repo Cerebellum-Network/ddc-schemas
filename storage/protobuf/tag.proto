@@ -9,9 +9,11 @@ option go_package = "/pb";
  * Tags can be used to search or filter pieces in storage.
  *
  * Specific tags are used to implement different higher protocols, such as a file system.
+ * The key should start with a prefix indicating which protocol or application relies on it.
+ * Example: `file-path` is used by the file protocol.
  */
 message Tag {
-  // The key of the tag.
+  // The key of the tag. The key should start with a letter (a-zA-Z).
   string key  = 1;
   // The value of the tag for this key.
   string value = 2;
