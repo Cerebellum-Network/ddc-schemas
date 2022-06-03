@@ -1,6 +1,6 @@
 
 
-docs: docs-storage
+docs: docs-storage docs-node-params
 
 docs-%:
 	@echo "\nBuilding docs for schema $*...";
