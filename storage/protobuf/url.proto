@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package pb;
+
+import "tag.proto";
+
+option go_package = "/pb";
+
+// The structured representation of a DDC URL.
+message URL {
+  Protocol            protocol        = 1;
+
+  PieceAddress        pieceAddress    = 2;
+
+  BucketAddress       BucketAddress   = 3;
+
+  repeated Option     options         = 7;
+}
+
+enum Protocol {
+  PIECE = 0;
+  FILE = 1;
+  IPIECE = 2;
+  IFILE = 3;
+}
+
+// Addressing of a bucket either by ID, or by namespace/name.
+message BucketAddress {
+  // The ID of the bucket to search.
+  uint32              bucketId        = 1;
+
+  // The namespace under which to search for named buckets.
+  string              namespace       = 2;
+
+  // The name of the bucket to search in the namespace.
+  string              bucketName      = 3;
+}
+
+// Addressing a piece by a CID, by a path, or by a search.
+message PieceAddress {
+  // Addressing a piece by content, given its CID.
+  string              cid             = 1;
+
+  // Addressing a piece by a name or a path in the bucket.
+  string              path            = 2;
+
+  // Addressing a piece by a search.
+  // A list of tags to match against the tags of stored pieces.
+  // There can be multiple tags with the same key.
+  repeated Tag        tags            = 3;
+}
+
+// An option as a key/value pair.
+message Option {
+  string              key             = 1;
+  string              value           = 2;
+}
