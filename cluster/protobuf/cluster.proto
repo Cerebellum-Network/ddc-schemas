@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "/pb";
+
+// The details of a cluster.
+message Cluster {
+  // The name of the engine running on nodes of this cluster.
+  string          engine_name               = 1;
+
+  // The minimum version of the engine necessary for a node to work correctly in this cluster.
+  string          engine_minimum_version    = 2;
+
+  // The kind of topology used to route requests to nodes.
+  TopologyType    topology_type             = 3;
+}
+
+
+// A topology specifies how requests should be routed to nodes of the cluster.
+//
+// The UNIFORM_RING topology defines a ring split into equal segments.
+//
+// Each piece of data is assigned to a segment based on a hash of the piece content. Replicated copies of the piece are assigned to subsequent segments.
+//
+// Each segment is assigned to a single vnode.
+// Each vnode is assigned to a physical node.
+// There can be multiple vnodes on a physical node.
+// The assignment of vnodes is managed in the `ddc-bucket` smart contract.
+enum TopologyType {
+  // The topology of a uniform ring.
+  UNIFORM_RING = 0;
+}
+
+
