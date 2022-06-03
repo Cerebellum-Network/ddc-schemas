@@ -1,7 +1,7 @@
 
-# Cluster Schema
+# Cluster Parameters Schema
 
-This is the data model used to configure clusters in the `ddc-bucket` smart contract.
+This is the data model used to configure clusters in the [ddc-bucket smart contract](https://github.com/Cerebellum-Network/ddc-bucket-contract).
 
 It specifies what type of nodes can be included in a cluster.
 

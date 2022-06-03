@@ -3,16 +3,16 @@ syntax = "proto3";
 package pb;
 option go_package = "/pb";
 
-// The details of a cluster.
-message Cluster {
+// The parameters of a cluster.
+message ClusterParams {
   // The name of the engine running on nodes of this cluster.
-  string          engine_name               = 1;
+  string          engineName               = 1;
 
   // The minimum version of the engine necessary for a node to work correctly in this cluster.
-  string          engine_minimum_version    = 2;
+  string          engineMinimumVersion    = 2;
 
   // The kind of topology used to route requests to nodes.
-  TopologyType    topology_type             = 3;
+  TopologyType    topologyType             = 3;
 }
 
 
