@@ -15,4 +15,6 @@ message Tag {
   string key  = 1;
   // The value of the tag for this key.
   string value = 2;
+  // Whether this tag should be indexed for fast retrieval.
+  bool   indexed = 3;
 }
