@@ -4,7 +4,7 @@ package pb;
 
 option go_package = "/pb";
 
-/**
+/*
  * A signature and details to help verify it.
  */
 message Signature {

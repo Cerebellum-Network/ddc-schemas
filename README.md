@@ -1,23 +1,24 @@
-## Generate code
+# DDC Schemas
 
-    PROJECT=storage
+This repository contains the interface definitions of DDC protocols.
+The documentation is hosted at [docs.cere.network](https://docs.cere.network).
 
-    docker run --rm                                                     \
-        -v $PWD:/repo -w /repo                                          \
-        jaegertracing/protobuf:0.3.1                                    \
-            --experimental_allow_proto3_optional                        \
-            --proto_path=$PROJECT/protobuf $PROJECT/protobuf/*.proto    \
-            --js_out=build/js/$PROJECT                                  \
-            --go_out=build/go/$PROJECT
 
-## Generate docs
+## Generating the documentation of the schema
 
-    PROJECT=storage
-    
-    docker run --rm                                 \
-        -v $PWD/build/tmp:/out                     \
-        -v $PWD/$PROJECT/protobuf:/protos           \
-        pseudomuto/protoc-gen-doc:1.5               \
-            --doc_opt=markdown,$PROJECT-protobuf.md
+The documentation is generated from the interface definitions in this repo. Refresh it with this command:
 
-    cat storage/README.md storage/CHANGELOG.md build/tmp/storage-protobuf.md > build/docs/storage-schema.md
+    make docs
+
+Find the result in `build/docs/` and synchronize it with the [source of docs.cere.network](https://github.com/Cerebellum-Network/docs.cere.network)
+
+
+## Generating code
+
+It is recommended to use code generated from the interface definitions.
+
+See the example for JavaScript in the Makefile: `make js`
+
+Or see a project-specific setup, for example, in the [Go SDK](https://github.com/Cerebellum-Network/cere-ddc-sdk-go).
+
+Whatever you do, please refer to specific versions of this ddc-schemas repository (git tags).

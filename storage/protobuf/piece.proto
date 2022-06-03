@@ -7,7 +7,7 @@ import "tag.proto";
 
 option go_package = "/pb";
 
-/**
+/*
  * A piece is a container of data and metadata.
  * It is the smallest indivisible unit stored in DDC object storage.
  */
