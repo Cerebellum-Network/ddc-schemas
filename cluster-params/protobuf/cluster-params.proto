@@ -5,8 +5,8 @@ option go_package = "/pb";
 
 // The parameters of a cluster.
 message ClusterParams {
-  // The name of the engine running on nodes of this cluster.
-  string          engineName              = 1;
+  // The type of engine running on nodes of this cluster.
+  EngineType      engineName              = 1;
 
   // The minimum version of the engine necessary for a node to work correctly in this cluster.
   string          engineMinimumVersion    = 2;
@@ -19,6 +19,15 @@ message ClusterParams {
 }
 
 
+// The list of engine types.
+enum EngineType {
+  // The engine of storage nodes to store data pieces.
+  STORAGE   = 0;
+  // The engine of CDN nodes to upload and search pieces.
+  CDN       = 1; // The CDN engine.
+}
+
+
 // A topology specifies how requests should be routed to nodes of a cluster.
 //
 // A cluster is segmented into a number of vnodes. Each vnode is assigned to a physical node and
@@ -26,9 +35,9 @@ message ClusterParams {
 // `ddc-bucket` smart contract.
 //
 // Each request is assigned to a list of vnodes based on a routing key.
-// In a storage cluster, routing keys must be derived from the identifier of data pieces.
-// In a stateless cluster, routing keys may be random, or may implement some affinity
-// to users or to queries for better performance.
+// In a STORAGE cluster, routing keys must be derived from the identifier of data pieces.
+// In a CDN or otherwise stateless cluster, routing keys may be random, or may implement some
+// affinity to users or to queries for better performance (caching, etc).
 enum TopologyType {
   // The UNIFORM_RING topology defines a ring split into equal segments per vnode.
   // Replication or fallback mechanisms use contiguous vnodes.
