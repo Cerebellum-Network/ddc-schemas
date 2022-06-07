@@ -6,7 +6,7 @@ option go_package = "/pb";
 // The parameters of a cluster.
 message ClusterParams {
   // The type of engine running on nodes of this cluster.
-  EngineType      engineName              = 1;
+  EngineType      engineType              = 1;
 
   // The minimum version of the engine necessary for a node to work correctly in this cluster.
   string          engineMinimumVersion    = 2;
@@ -16,6 +16,9 @@ message ClusterParams {
 
   // The maximum replication factor supported on this cluster (total number of copies).
   uint32          maximumReplication      = 4;
+
+  // A human-readable description of the cluster.
+  string          description             = 5;
 }
 
 
