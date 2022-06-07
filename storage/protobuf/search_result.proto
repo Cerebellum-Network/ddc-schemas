@@ -11,5 +11,10 @@ option go_package = "/pb";
  */
 message SearchResult {
   // The list of pieces found in storage.
-  repeated SignedPiece signedPieces = 1;
+  //repeated SignedPiece signedPieces = 1;
+  reserved 1;
+
+  // The map of pieces found in storage.
+  // Key is CID and value is Signed Piece.
+  map<string, SignedPiece> signedPieces = 2;
 }
