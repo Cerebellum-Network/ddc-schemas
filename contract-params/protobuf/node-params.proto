@@ -5,8 +5,8 @@ option go_package = "/pb";
 
 // The parameters of a node.
 message NodeParams {
-  // The name of the engine running on the node.
-  string          engineName              = 1;
+  // The type of engine running on the node.
+  EngineType      engineType              = 1;
 
   // The version of the engine running on the node.
   string          engineVersion           = 2;
@@ -16,4 +16,13 @@ message NodeParams {
 
   // A human-readable description of the node.
   string          description             = 4;
+}
+
+
+// The list of engine types.
+enum EngineType {
+  // The engine of storage nodes to store data pieces.
+  STORAGE   = 0;
+  // The engine of CDN nodes to upload and search pieces.
+  CDN       = 1;
 }

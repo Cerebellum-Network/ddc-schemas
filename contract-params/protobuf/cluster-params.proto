@@ -3,6 +3,8 @@ syntax = "proto3";
 package pb;
 option go_package = "/pb";
 
+import "node-params.proto";
+
 // The parameters of a cluster.
 message ClusterParams {
   // The type of engine running on nodes of this cluster.
@@ -19,15 +21,6 @@ message ClusterParams {
 
   // A human-readable description of the cluster.
   string          description             = 5;
-}
-
-
-// The list of engine types.
-enum EngineType {
-  // The engine of storage nodes to store data pieces.
-  STORAGE   = 0;
-  // The engine of CDN nodes to upload and search pieces.
-  CDN       = 1; // The CDN engine.
 }
 
 
