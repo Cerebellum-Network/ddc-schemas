@@ -17,6 +17,9 @@ message Tag {
   string key  = 1;
   // The value of the tag for this key.
   string value = 2;
-  // Whether this tag should be indexed for fast retrieval.
+  // Whether this tag should be indexed and searchable.
+  //
+  // Nodes should enter indexed tags into their database to allow efficient queries on a key
+  // for an exact value or a range of values.
   bool   indexed = 3;
 }
