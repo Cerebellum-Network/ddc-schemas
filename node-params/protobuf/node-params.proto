@@ -13,4 +13,7 @@ message NodeParams {
 
   // The base URL where the engine API is reachable.
   string          url                     = 3;
+
+  // A human-readable description of the node.
+  string          description             = 4;
 }
