@@ -21,8 +21,10 @@ message NodeParams {
 
 // The list of engine types.
 enum EngineType {
+  // The engine type is missing, this is probably an error.
+  UNKNOWN   = 0;
   // The engine of storage nodes to store data pieces.
-  STORAGE   = 0;
+  STORAGE   = 1;
   // The engine of CDN nodes to upload and search pieces.
-  CDN       = 1;
+  CDN       = 2;
 }

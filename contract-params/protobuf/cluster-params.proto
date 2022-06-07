@@ -37,6 +37,7 @@ message ClusterParams {
 enum TopologyType {
   // The UNIFORM_RING topology defines a ring split into equal segments per vnode.
   // Replication or fallback mechanisms use contiguous vnodes.
+  // This is the default topology.
   UNIFORM_RING = 0;
 }
 
