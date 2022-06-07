@@ -1,6 +1,6 @@
 
 
-docs: docs-storage docs-cluster-params
+docs: docs-storage docs-contract-params
 
 docs-%:
 	@echo "\nBuilding docs for schema $*...";
