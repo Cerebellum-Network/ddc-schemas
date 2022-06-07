@@ -16,7 +16,7 @@ docs-%:
 	cat $*/README.md $*/CHANGELOG.md build/tmp/$*-protobuf.md > build/docs/$*-schema.md;
 
 
-js: js-storage
+js: js-storage js-contract-params
 
 js-%:
 	@echo "\nBuilding JS code for schema $*...";
