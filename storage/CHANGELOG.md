@@ -1,5 +1,9 @@
 ## Changelog
 
+### vNext
+- Specify whether or not a tag should be indexed for fast search.
+
+
 ### v0.1.2
 
 - Piece and query model.
