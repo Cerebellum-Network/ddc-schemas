@@ -12,7 +12,7 @@ option go_package = "/pb";
  */
 message Tag {
   // The key of the tag.
-  string key  = 1;
+  string  key     = 1;
   // The value of the tag for this key.
-  string value = 2;
+  bytes   value   = 2;
 }
