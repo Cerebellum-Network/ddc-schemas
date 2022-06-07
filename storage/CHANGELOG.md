@@ -2,7 +2,7 @@
 
 ### vNext
 - Specify whether or not a tag should be indexed for fast search.
-
+- Tag values are bytes instead of strings.
 
 ### v0.1.2
 
