@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "/pb";
+
+// The parameters of a node.
+message NodeParams {
+  // The type of engine running on the node.
+  EngineType      engineType              = 1;
+
+  // The version of the engine running on the node.
+  string          engineVersion           = 2;
+
+  // The base URL where the engine API is reachable.
+  string          url                     = 3;
+
+  // A human-readable description of the node.
+  string          description             = 4;
+}
+
+
+// The list of engine types.
+enum EngineType {
+  // The engine type is missing, this is probably an error.
+  UNKNOWN   = 0;
+  // The engine of storage nodes to store data pieces.
+  STORAGE   = 1;
+  // The engine of CDN nodes to upload and search pieces.
+  CDN       = 2;
+}
