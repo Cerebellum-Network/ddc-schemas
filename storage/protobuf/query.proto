@@ -15,6 +15,6 @@ message Query {
   // A list of tags to match against the tags of stored pieces.
   // There can be multiple tags with the same key.
   repeated Tag tags     = 2;
-  // Return search result with piece data
-  bool         loadData = 3;
+  // Skip piece data in search result.
+  bool         skipData = 3;
 }
