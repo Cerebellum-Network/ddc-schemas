@@ -15,12 +15,12 @@ message SearchResult {
 }
 
 /*
- * A searched piece found in storage
+ * A searched piece found in storage.
  */
 message SearchedPiece {
   // Found signed piece.
   SignedPiece signedPiece = 1;
 
-  // CID of the found piece
+  // CID of the found piece.
   string cid = 2;
 }
