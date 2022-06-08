@@ -1,5 +1,8 @@
 ## Changelog
 
+### vNext
+- Tag values are bytes instead of strings.
+
 ### v0.1.3
 
 - Piece and query model.
