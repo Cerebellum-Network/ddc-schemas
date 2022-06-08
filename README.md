@@ -45,6 +45,8 @@ Number | Prefix (hex) | Encoding      | Description
 0      | 0xD00C00     |               | reserved
 1      | 0xD00C01     | protobuf      | [SignedPiece](storage/protobuf/signed_piece.proto)
 2      | 0xD00C02     | protobuf      | [SearchResult](storage/protobuf/search_result.proto)
+3      | 0xD00C03     | protobuf      | [ClusterParams](contract-params/protobuf/cluster-params.proto)
+4      | 0xD00C04     | protobuf      | [NodeParams](contract-params/protobuf/node-params.proto)
 
 
 ## Generating the documentation of the schemas
