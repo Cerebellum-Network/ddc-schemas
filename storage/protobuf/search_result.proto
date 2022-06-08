@@ -11,5 +11,16 @@ option go_package = "/pb";
  */
 message SearchResult {
   // The list of pieces found in storage.
-  repeated SignedPiece signedPieces = 1;
+  repeated SearchedPiece searchedPieces = 1;
+}
+
+/*
+ * A searched piece found in storage.
+ */
+message SearchedPiece {
+  // Found signed piece.
+  SignedPiece signedPiece = 1;
+
+  // CID of the found piece.
+  string cid = 2;
 }
