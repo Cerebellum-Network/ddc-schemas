@@ -6,8 +6,8 @@ The documentation is hosted at [docs.cere.network](https://docs.cere.network).
 
 ## Message serialization
 
-Messages and stored objects in DDC are serialized in JSON, in ProtoBuf, or in SCALE.
-The serialization method in DDC aims for the following goals:
+Objects and messages stored in DDC nodes and smart contracts are serialized in JSON, in ProtoBuf,
+or in SCALE. The serialization method in DDC aims for the following goals:
 
 * to support the evolution of DDC protocols and stored data,
 * to detect errors and incompatible components,
@@ -23,24 +23,28 @@ This is achieved by using the following specification:
 
 **Other serializations** such as binary ProtoBuf and SCALE should follow this format:
 
-    ddc_prefix type_number message_body
+    ddc_prefix message_type message_body
 
 * The **ddc_prefix** represents the DDC namespace.
-  It is the three bytes: **`0xDDC201`**
+  It is the two bytes: **`0xD00C`**
 
-* The **type number** represents the message type from the table below.
-  It is a protobuf varint, that is one byte for numbers up to 127.
+* The **message_type** is the number of the message type in the table below.
+  It is a ProtoBuf varint, that is one byte for numbers up to 127.
 
-* The **message body** is encoded as implied by the message type, usually a protobuf binary encoding.
+* The **message body** is encoded as implied by the message type, usually a ProtoBuf binary encoding.
+
+Note: the prefix and type are equivalent to the following ProtoBuf field:
+
+    uint32 message_type = 202;
 
 
 ### Message types
 
 Number | Prefix (hex) | Encoding      | Description
 ------ | ------------ | ------------- | ------------------------
-0      | 0xDDC20100   |               | reserved
-1      | 0xDDC20101   | protobuf      | [SignedPiece](storage/protobuf/signed_piece.proto)
-2      | 0xDDC20102   | protobuf      | [SearchResult](storage/protobuf/search_result.proto)
+0      | 0xD00C00     |               | reserved
+1      | 0xD00C01     | protobuf      | [SignedPiece](storage/protobuf/signed_piece.proto)
+2      | 0xD00C02     | protobuf      | [SearchResult](storage/protobuf/search_result.proto)
 
 
 ## Generating the documentation of the schemas
