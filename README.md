@@ -4,9 +4,24 @@ This repository contains the interface definitions of DDC protocols.
 The documentation is hosted at [docs.cere.network](https://docs.cere.network).
 
 
-## Message encoding
+## Message serialization
 
-Messages and objects in DDC are serialized as follows:
+Messages and stored objects in DDC are serialized in JSON, in ProtoBuf, or in SCALE.
+The serialization method in DDC aims for the following goals:
+
+* to support the evolution of DDC protocols and stored data,
+* to detect errors and incompatible components,
+* to support polymorphic objects (multiple types) without relying on transport-specific methods,
+* to be interoperable with other systems such as multicodec, IPFS, or ENS.
+
+
+### Specification
+
+This is achieved by using the following specification:
+
+**JSON serializations** must start with `{`, `[`, or `"` (not a number or a space), in UTF-8, in order to be recognizable and upgradeable by future components.
+
+**Other serializations** such as binary ProtoBuf and SCALE should follow this format:
 
     ddc_prefix type_number message_body
 
@@ -16,12 +31,10 @@ Messages and objects in DDC are serialized as follows:
 * The **type number** represents the message type from the table below.
   It is a protobuf varint, that is one byte for numbers up to 127.
 
-* The **message body** is encoded as specified by the message type, usually a protobuf binary encoding.
-
-The purpose of this format is to support the evolution of DDC protocols, to detect errors, and to be compatible with other systems such as multicodec or ENS.
+* The **message body** is encoded as implied by the message type, usually a protobuf binary encoding.
 
 
-## Message types
+### Message types
 
 Number | Prefix (hex) | Encoding      | Description
 ------ | ------------ | ------------- | ------------------------
