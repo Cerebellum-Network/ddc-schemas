@@ -1,24 +1,31 @@
-PROJECT=storage
-
-docs:
-	docker run --rm                                 \
-		-v ${PWD}:/repo                     \
-		rvolosatovs/protoc:3.3                             	\
-			--proto_path=/repo/${PROJECT}/protobuf	\
-			--doc_out=/repo/build/tmp 						\
-			--doc_opt=markdown,${PROJECT}-protobuf.md \
-			$$(find ${PROJECT}/protobuf -name '*.proto' -printf '%P\n' | sort)
-
-	cat ${PROJECT}/README.md ${PROJECT}/CHANGELOG.md build/tmp/${PROJECT}-protobuf.md > build/docs/${PROJECT}-schema.md
 
 
-js:
-	docker run --rm                                 \
-		-v ${PWD}:/repo                     \
-		rvolosatovs/protoc:3.3                             	\
-			--proto_path=/repo/${PROJECT}/protobuf	\
-			--js_out=/repo/build/js/${PROJECT} 						\
-			$$(find ${PROJECT}/protobuf -name '*.proto' -printf '%P\n' | sort)
+docs: docs-storage docs-contract-params
+
+docs-%:
+	@echo "\nBuilding docs for schema ${*}...";
+
+	docker run --rm                                										\
+		-v ${PWD}:/repo                     											\
+		rvolosatovs/protoc:3.3                      									\
+			--proto_path=/repo/$*/protobuf												\
+			--doc_out=/repo/build/tmp 													\
+			--doc_opt=markdown,$*-protobuf.md 											\
+			$$(find $*/protobuf -name '*.proto' -type f | sed 's/.*\///' | sort);		\
+
+	cat $*/README.md $*/CHANGELOG.md build/tmp/$*-protobuf.md > build/docs/$*-schema.md;
+
+js: js-storage js-contract-params
+
+js-%:
+	@echo "\nBuilding JS code for schema $*...";
+
+	docker run --rm                                 							\
+		-v ${PWD}:/repo                     									\
+		rvolosatovs/protoc:3.3                             						\
+			--proto_path=/repo/$*/protobuf								\
+			--js_out=/repo/build/js/$* 									\
+			$$(find $*/protobuf -name '*.proto' -printf '%P\n' | sort);	
 
 fix-docker-mess:
 	sudo chown $$(whoami) -R build
