@@ -4,6 +4,13 @@
 This is the data model used to configure clusters, nodes, and buckets in the [ddc-bucket smart contract](https://github.com/Cerebellum-Network/ddc-bucket-contract).
 
 
+## Bucket Parameters
+
+Bucket parameters specify:
+
+- How data should be replicated.
+
+
 ## Cluster Parameters
 
 Cluster parameters specify:
