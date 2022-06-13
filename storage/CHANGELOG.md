@@ -7,6 +7,7 @@
 - Added the option `Query.skipData` to fetch piece metadata without payload data in search results.
 - Added the option `Tag.searchable` to specify whether or not a tag should be indexed for fast search.
 - `Tag.value` is now bytes instead of string.
+- Added a table of known tags.
 
 ### v0.1.2
 
