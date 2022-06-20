@@ -23,9 +23,9 @@ option go_package = "/pb";
  * Below is the structure of a tag:
  */
 message Tag {
-  // The key of the tag. The key should start with a letter (a-zA-Z).
-  string        key           = 1;
-  // The value of the tag for this key.
+  // The key of the tag. It is usually a UTF-8 string, but it may be any data.
+  bytes         key           = 1;
+  // The value of the tag for this key. The value should be interpreted based on the key.
   bytes         value         = 2;
   // Whether this tag is searchable or not. Yes by default.
   SearchType    searchable    = 3;
