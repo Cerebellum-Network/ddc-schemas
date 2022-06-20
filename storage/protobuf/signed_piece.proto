@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb;
 
-import "piece.proto";
 import "signature.proto";
 
 option go_package = "/pb";
@@ -12,8 +11,8 @@ option go_package = "/pb";
  * This can be used to verify the intent of the account holder to upload the piece.
  */
 message SignedPiece {
-  // A piece.
-  Piece     piece     = 1;
+  // A Piece message serialized in protobuf.
+  bytes     piece     = 1;
   // A signature of the piece by the keypair of the uploader.
   Signature signature = 2;
 }
