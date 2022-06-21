@@ -1,6 +1,7 @@
 ## Changelog
 
 ### vNext
+- `SignedPiece.piece` is embedded as a serialized message.
 
 ### v0.1.3
 - [Breaking] Return piece CIDs in `SearchResult`.
