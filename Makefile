@@ -1,6 +1,7 @@
 
 
 docs: docs-storage docs-contract-params
+	cp serialization.md build/docs/
 
 docs-%:
 	@echo "\nBuilding docs for schema $*...";
