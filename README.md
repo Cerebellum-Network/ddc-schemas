@@ -4,7 +4,7 @@ This repository contains the interface definitions of DDC protocols.
 The documentation is hosted at [docs.cere.network](https://docs.cere.network).
 
 
-## Generating the documentation of the schema
+## Generating the documentation of the schemas
 
 The documentation is generated from the interface definitions in this repo. Refresh it with this command:
 
@@ -13,7 +13,7 @@ The documentation is generated from the interface definitions in this repo. Refr
 Find the result in `build/docs/` and synchronize it with the [source of docs.cere.network](https://github.com/Cerebellum-Network/docs.cere.network)
 
 
-## Generating code
+## Generating code from the schemas
 
 It is recommended to use code generated from the interface definitions.
 
