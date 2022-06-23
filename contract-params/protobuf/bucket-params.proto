@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "/pb";
+
+
+// The parameters of a bucket.
+message BucketParams {
+  // The replication factor desired for this bucket (total number of copies).
+  uint32          replication      = 1;
+
+  // A human-readable description of the bucket.
+  string          description             = 2;
+}
