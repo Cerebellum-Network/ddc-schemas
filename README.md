@@ -21,32 +21,26 @@ This is achieved by using the following specification:
 
 **JSON serializations** must start with `{`, `[`, or `"` (not a number or a space), in UTF-8, in order to be recognizable and upgradeable by future components.
 
-**Other serializations** such as binary ProtoBuf and SCALE should follow this format:
+**Binary serializations** such as binary ProtoBuf and SCALE should start the message with a type field, like so:
 
-    ddc_prefix message_type message_body
+    type_key type_number message_body
 
-* The **ddc_prefix** represents the DDC namespace.
-  It is the two bytes: **`0xD00C`**
+* The **type_key** is a recognizable marker of the type field. It represents the namespace of DDC message types. It is the two bytes: **`0xD00C`**
 
-* The **message_type** is the number of the message type in the table below.
-  It is a ProtoBuf varint, that is one byte for numbers up to 127.
+* The **type_number** is the number of the message type in the table below.
+  It is a ProtoBuf varint, e.g., one byte for numbers up to 127.
 
-* The **message body** is encoded as implied by the message type, usually a ProtoBuf binary encoding.
+* The **message_body** is encoded as implied by the message type, usually a ProtoBuf binary encoding.
 
-Note: the prefix and type are equivalent to the following ProtoBuf field:
-
-    uint32 message_type = 202;
+Note: This format is compatible with ProtoBuf. Parsers that do not know about the type field will simply ignore it; technically they will decode an optional ProtoBuf field `uint64 type_number = 202;`. Parsers that expect the type field, but see a message without it, can assume a default behavior.
 
 
 ### Message types
 
-Number | Prefix (hex) | Encoding      | Description
------- | ------------ | ------------- | ------------------------
-0      | 0xD00C00     |               | reserved
-1      | 0xD00C01     | protobuf      | [SignedPiece](storage/protobuf/signed_piece.proto)
-2      | 0xD00C02     | protobuf      | [SearchResult](storage/protobuf/search_result.proto)
-3      | 0xD00C03     | protobuf      | [ClusterParams](contract-params/protobuf/cluster-params.proto)
-4      | 0xD00C04     | protobuf      | [NodeParams](contract-params/protobuf/node-params.proto)
+Number | Type Field (hex) | Serialization | Description
+------ | ---------------- | ------------- | -----------
+0      | 0xD00C00         |               | reserved
+1      | 0xD00C01         | protobuf      | [SignedPiece](storage/protobuf/signed_piece.proto)
 
 
 ## Generating the documentation of the schemas
