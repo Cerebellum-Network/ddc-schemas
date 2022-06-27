@@ -18,17 +18,17 @@ option go_package = "/pb";
  *
  * - Store the public key of the signer in `publicKey` in binary encoding.
  *
- * - Store the current time in `timeMs`
- *     - In JavaScript: `timeMs = +new Date()`
+ * - Store the current time in `timestamp`
+ *     - In JavaScript: `timestamp = +new Date()`
  *
  * - Format the current time in ISO 8601 `YYYY-MM-DDTHH:mm:ss.sssZ`
-       - In JavaScript: `timeText = new Date(timeMs).toISOString()`
+       - In JavaScript: `timeText = new Date(timestamp).toISOString()`
        - In Go format: `2006-01-02T15:04:05.000Z`
  *
- * - The signed message of the upload of a piece is:
- *     - `<Bytes>DDC upload ${CID} at ${timeText}</Bytes>`
+ * - The signed message to store a piece is:
+ *     - `<Bytes>DDC store ${CID} at ${timeText}</Bytes>`
  *     - Note: the `<Bytes>` part is enforced by the Polkadot.js browser extension.
- *     - Example: `<Bytes>DDC upload bafk2bzacea73ycjnxe2qov7cvnhx52lzfp6nf5jcblnfus6gqreh6ygganbws at 2022-06-27T07:33:44.607Z</Bytes>`
+ *     - Example: `<Bytes>DDC store bafk2bzacea73ycjnxe2qov7cvnhx52lzfp6nf5jcblnfus6gqreh6ygganbws at 2022-06-27T07:33:44.607Z</Bytes>`
  *
  * - The signing scheme should be sr25519, and `scheme` should be empty.
  *     - If this not supported by a signer, then `scheme` should be "ed25519".
@@ -59,7 +59,7 @@ message Signature {
   // Default and recommended value: 0 or 0xb220, meaning blake2b-256.
   uint64 multiHashType = 4;
   // The timestamp in UNIX milliseconds.
-  uint64 timeMs        = 5;
+  uint64 timestamp     = 5;
   // The public key in binary encoding as per the scheme.
   bytes publicKey      = 6;
   // The cryptographic signature in binary encoding as per the scheme.
