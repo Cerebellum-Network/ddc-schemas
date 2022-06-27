@@ -42,16 +42,15 @@ option go_package = "/pb";
  * 
  * #### Legacy signatures before v0.1.4
  * 
- * If `signer` and `value` are present:
- * - Decode them from hexadecimal with or without `0x`, instead of `publicKey` and `sig`.
- * - The signed message is `${CID}` or `<Bytes>${CID}</Bytes>`.
+ * - If `value` is 130 bytes long, and `signer` is 66 bytes long, and they starts with `0x` (UTF-8), decode them from hexadecimal.
+ * - Then, the signed message is `${CID}` or `<Bytes>${CID}</Bytes>`.
  *
  */
 message Signature {
-  // [deprecated] A cryptographic signature in hexadecimal with or without "0x".
-  string value         = 1;
-  // [deprecated] The public key of the signer in hexadecimal with or without "0x".
-  string signer        = 2;
+  // The cryptographic signature in binary encoding as per the scheme.
+  bytes value          = 1;
+  // The public key of the signer in binary encoding as per the scheme.
+  bytes signer         = 2;
   // The name of the signature scheme (sr25519, secp256k1, ed25519).
   // Default and recommended value: "" or "sr25519".
   string scheme        = 3;
@@ -60,8 +59,4 @@ message Signature {
   uint64 multiHashType = 4;
   // The timestamp in UNIX milliseconds.
   uint64 timestamp     = 5;
-  // The public key in binary encoding as per the scheme.
-  bytes publicKey      = 6;
-  // The cryptographic signature in binary encoding as per the scheme.
-  bytes sig            = 7;
 }
