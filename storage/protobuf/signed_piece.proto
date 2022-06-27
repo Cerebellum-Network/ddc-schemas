@@ -9,6 +9,21 @@ option go_package = "/pb";
 /*
  * A piece signed by an account.
  * This can be used to verify the intent of the account holder to upload the piece.
+ * 
+ * #### Generation
+ * - Compute a CID from the `piece` bytes using details from `signature`:
+ *     - [CIDv1](https://github.com/multiformats/cid)
+ *     - Hash function `signature.multiHashType`
+ *     - Content type codec `0x55`
+ *     - Base encoded in Base32 with the prefix `b`
+ * - The signed message is the CID itself.
+ * - Sign the message using `signature.scheme`
+ * - Store the signature in `signature.value` in hexadecimal with `0x`.
+ * 
+ * #### Verification
+ * - Recompute the signed message.
+ * - Decode `signature.value` from hexadecimal with or without `0x`.
+ * - Verify the signature of the message using `signature.scheme`.
  */
 message SignedPiece {
   // A Piece message serialized in protobuf.
