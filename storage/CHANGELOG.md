@@ -2,6 +2,7 @@
 
 ### vNext
 - `SignedPiece.piece` is embedded as a serialized message.
+- Improved security and performance of signed upload requests.
 
 ### v0.1.3
 - [Breaking] Return piece CIDs in `SearchResult`.
