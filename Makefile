@@ -10,7 +10,7 @@ docs-%:
 		rvolosatovs/protoc:3.3                      									\
 			--proto_path=/repo/$*/protobuf												\
 			--doc_out=/repo/build/tmp 													\
-			--doc_opt=markdown,$*-protobuf.md 											\
+			--doc_opt=/repo/markdown.tmpl,$*-protobuf.md 								\
 			$$(find $*/protobuf -name '*.proto' -type f | sed 's/.*\///' | sort);		\
 
 	cat $*/README.md $*/CHANGELOG.md build/tmp/$*-protobuf.md > build/docs/$*-schema.md;
