@@ -22,3 +22,8 @@ See the example for JavaScript in the Makefile: `make js`
 Or see a project-specific setup, for example, in the [Go SDK](https://github.com/Cerebellum-Network/cere-ddc-sdk-go).
 
 Whatever you do, please refer to specific versions of this ddc-schemas repository (git tags).
+
+
+## Test vectors
+
+Test values and their serialized forms are given in the `test-vectors` folder. These files were generated from test code of the respective SDKs. They can be used to test for regressions or compatibility between different components at different versions.
