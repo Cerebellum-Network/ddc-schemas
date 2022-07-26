@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pb;
+
+import "signature.proto";
+import "query.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "/pb";
+
+message LogRecord {
+  oneof record {
+    WriteRecord writeRecord = 1;
+    ReadRecord readRecord = 2;
+    QueryRecord queryRecord = 3;
+  }
+  google.protobuf.Timestamp timestamp = 4;
+  string id = 5;
+}
+
+message WriteRecord {
+  string cid = 1;
+  uint32 bucketId = 2;
+  uint32 size = 3;
+  Signature signature = 4;
+}
+
+message ReadRecord {
+  string cid = 1;
+  uint32 bucketId = 2;
+}
+
+message QueryRecord {
+  Query query = 1;
+}
