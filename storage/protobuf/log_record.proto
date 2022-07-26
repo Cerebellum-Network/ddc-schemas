@@ -15,7 +15,10 @@ message LogRecord {
     QueryRecord queryRecord = 3;
   }
   google.protobuf.Timestamp timestamp = 4;
-  string id = 5;
+  string uuid = 5;
+  string ip = 6;
+  uint32 responseCode = 7;
+  optional string error = 8;
 }
 
 message WriteRecord {
