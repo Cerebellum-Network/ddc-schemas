@@ -8,31 +8,49 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "/pb";
 
-message LogRecord {
-  oneof record {
-    WriteRecord writeRecord = 1;
-    ReadRecord readRecord = 2;
-    QueryRecord queryRecord = 3;
-  }
-  google.protobuf.Timestamp timestamp = 4;
-  string uuid = 5;
-  string ip = 6;
-  uint32 responseCode = 7;
-  optional string error = 8;
+enum Code {
+  SUCCESS = 0;
+  INTERNAL_ERROR = 1;
+  BAD_REQUEST_BODY = 2;
+  DESERIALIZE_FAIL = 3;
+  BUCKET_READ_FAIL = 4;
+  BUCKET_RENT_EXPIRED = 5;
+  INVALID_PUBLIC_KEY = 6;
+  INVALID_SIGNATURE = 7;
+  NO_ACCESS = 8;
+  SERIALIZE_FAIL = 9;
+  NO_REQUIRED_PARAMETER = 10;
 }
 
-message WriteRecord {
+message Ack {
+  oneof request {
+    WriteRequest writeRequest = 1;
+    ReadRequest readRequest = 2;
+    QueryRequest queryRequest = 3;
+  }
+  bytes nonce = 4;
+  uint32 nodeId = 5;
+  Code responseCode = 6;
+}
+
+message LogRecord {
+  bytes ack = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  string address = 3;
+}
+
+message WriteRequest {
   string cid = 1;
   uint32 bucketId = 2;
   uint32 size = 3;
   Signature signature = 4;
 }
 
-message ReadRecord {
+message ReadRequest {
   string cid = 1;
   uint32 bucketId = 2;
 }
 
-message QueryRecord {
+message QueryRequest {
   Query query = 1;
 }
