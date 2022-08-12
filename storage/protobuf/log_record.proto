@@ -8,30 +8,52 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "/pb";
 
-
+/*
+  A log record is a record for logging activity of each request to node.
+ */
 message LogRecord {
+  // request's metadata
   oneof request {
     WriteRequest writeRequest = 1;
     ReadRequest readRequest = 2;
     QueryRequest queryRequest = 3;
   }
+  // timestamp of request
   google.protobuf.Timestamp timestamp = 4;
+  // ip address of user who sent request
   string address = 5;
+  // number of used resources for processing request
   uint32 resources = 6;
 }
 
+/*
+  A write request is a container of metadata for upload piece requests
+ */
 message WriteRequest {
+  // CID of saved piece
   string cid = 1;
+  // bucket identifier where was stored piece
   uint32 bucketId = 2;
+  // size of stored piece
   uint32 size = 3;
+  // piece signature
   Signature signature = 4;
 }
 
+/*
+  A read request is a container of metadata for download piece requests
+ */
 message ReadRequest {
+  // CID of requested piece
   string cid = 1;
+  // bucket identifier of requested piece
   uint32 bucketId = 2;
 }
 
+/*
+  A query request is a container of metadata for search requests
+ */
 message QueryRequest {
+  // query for search
   Query query = 1;
 }
