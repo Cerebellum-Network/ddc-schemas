@@ -2,6 +2,8 @@
 
 ### vNext
 
+### v0.1.5
+- Added Log Record model for logging Activity Capture
 
 ### v0.1.4
 - `SignedPiece.piece` is embedded as a serialized message.
