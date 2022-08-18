@@ -14,8 +14,11 @@ option go_package = "/pb";
 message LogRecord {
   // request's metadata
   oneof request {
+    // write request metadata
     WriteRequest writeRequest = 1;
+    // read request metadata
     ReadRequest readRequest = 2;
+    // search request metadata
     QueryRequest queryRequest = 3;
   }
   // timestamp of request
@@ -27,7 +30,14 @@ message LogRecord {
 }
 
 /*
-  A write request is a container of metadata for upload piece requests
+ * A log records list
+ */
+message LogRecordList {
+  repeated LogRecord logRecords = 1;
+}
+
+/*
+ * A write request is a container of metadata for upload piece requests
  */
 message WriteRequest {
   // CID of saved piece
@@ -41,7 +51,7 @@ message WriteRequest {
 }
 
 /*
-  A read request is a container of metadata for download piece requests
+ * A read request is a container of metadata for download piece requests
  */
 message ReadRequest {
   // CID of requested piece
@@ -51,7 +61,7 @@ message ReadRequest {
 }
 
 /*
-  A query request is a container of metadata for search requests
+ * A query request is a container of metadata for search requests
  */
 message QueryRequest {
   // query for search
