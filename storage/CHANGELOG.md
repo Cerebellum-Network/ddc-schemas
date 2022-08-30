@@ -4,6 +4,7 @@
 
 ### v0.1.5
 - Added Log Record model for logging Activity Capture
+- Added Request and Response for API v1
 
 ### v0.1.4
 - `SignedPiece.piece` is embedded as a serialized message.
