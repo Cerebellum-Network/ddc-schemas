@@ -12,7 +12,7 @@ message Request {
   bytes body = 1;
   // User public key
   bytes publicKey = 3;
-  // User signature sign(CID(varint body + body + varint sessionId size + sessionId))
+  // User signature sign(CID(HTTP method size + HTTP method + url size + url + varint body size + body + varint sessionId size + sessionId))
   bytes signature = 4;
   // The name of the signature scheme (sr25519, ed25519).
   // Default and recommended value: "" or "sr25519".
