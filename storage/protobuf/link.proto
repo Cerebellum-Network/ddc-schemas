@@ -9,9 +9,9 @@ option go_package = "/pb";
  */
 message Link {
   // The CID of the linked piece.
-  string          cid  = 1;
+  string cid  = 1;
   // The size of the payload of the linked piece.
-  uint64          size = 2;
+  uint64 size = 2;
   // The name of the linked piece, in the context of the linking piece.
-  optional string name = 3;
+  string name = 3;
 }
