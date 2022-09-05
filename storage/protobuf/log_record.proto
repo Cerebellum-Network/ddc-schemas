@@ -27,6 +27,10 @@ message LogRecord {
   string address = 5;
   // number of used resources for processing request
   uint32 resources = 6;
+  // users publicKey
+  bytes publicKey = 7;
+  // session id
+  bytes sessionId = 9;
 }
 
 /*
