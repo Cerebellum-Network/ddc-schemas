@@ -33,8 +33,8 @@ message Response {
   bytes body = 1;
   // Response code
   Code responseCode = 2;
-  // Used resources for executing request
-  uint32 resources = 3;
+  // Used gas for executing request
+  uint32 gas = 3;
   // CDN public key
   bytes publicKey = 4;
   // CDN signature sign(CID(varint body + body + varint response code + varint resources))
