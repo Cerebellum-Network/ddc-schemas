@@ -13,6 +13,8 @@ message SessionStatus {
   bytes sessionId = 3;
   // Session expiration time in UNIX milliseconds
   uint64 endOfEpoch = 4;
+  // Bucket Id for which session
+  uint32 bucketId = 5;
 }
 
 message SessionStatusRecord {
