@@ -4,6 +4,9 @@ package pb;
 
 option go_package = "/pb";
 
+/*
+  Session status update request
+ */
 message SessionStatus {
   // Node public key
   bytes publicKey = 1;
@@ -17,6 +20,9 @@ message SessionStatus {
   uint32 bucketId = 5;
 }
 
+/*
+  Session status record in storage
+ */
 message SessionStatusRecord {
   // Session status
   SessionStatus sessionStatus = 1;
