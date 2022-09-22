@@ -4,7 +4,6 @@ package pb;
 
 import "signature.proto";
 import "query.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package = "/pb";
 
@@ -21,12 +20,12 @@ message LogRecord {
     // search request metadata
     QueryRequest queryRequest = 3;
   }
-  // timestamp of request
-  google.protobuf.Timestamp timestamp = 4;
+  // timestamp of request in UNIX milliseconds.
+  uint64 timestamp = 4;
   // ip address of user who sent request
   string address = 5;
-  // number of used resources for processing request
-  uint32 resources = 6;
+  // number of used gas for processing request
+  uint32 gas = 6;
   // users publicKey
   bytes publicKey = 7;
   // session id
