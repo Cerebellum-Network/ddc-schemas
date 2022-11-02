@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "/pb";
+
+/*
+ * Acknowledgment data
+ */
+message Ack {
+  // timestamp of request in UNIX milliseconds.
+  uint64 timestamp = 1;
+  // node public key where gas was used
+  bytes publicKey = 2;
+  // confirmed used gas
+  uint64 gas = 3;
+  // nonce for avoiding ack duplicates
+  bytes nonce = 4;
+}
