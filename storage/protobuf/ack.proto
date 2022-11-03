@@ -17,3 +17,10 @@ message Ack {
   // nonce for avoiding ack duplicates
   bytes nonce = 4;
 }
+
+message AckRecord {
+  // acknowledgment data
+  Ack ack = 1;
+  // user public key
+  bytes publicKey = 2;
+}
