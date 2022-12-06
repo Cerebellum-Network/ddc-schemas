@@ -26,3 +26,10 @@ message AckRecord {
   // timestamp when record was saved in UNIX nanoseconds
   uint64 timestamp = 3;
 }
+
+/*
+ * A ack records list
+ */
+message AckRecordList {
+  repeated AckRecord ackRecords = 1;
+}
