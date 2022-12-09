@@ -24,7 +24,7 @@ message AckRecord {
   // user public key
   bytes publicKey = 2;
   // timestamp when record was saved in UNIX nanoseconds
-  uint64 timestamp = 3;
+  uint64 timestamp = 3  [jstype = JS_STRING];
 }
 
 /*

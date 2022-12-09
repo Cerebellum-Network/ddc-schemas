@@ -21,7 +21,7 @@ message LogRecord {
     QueryRequest queryRequest = 3;
   }
   // timestamp of request in UNIX nanoseconds.
-  uint64 timestamp = 4;
+  uint64 timestamp = 4  [jstype = JS_STRING];
   // ip address of user who sent request
   string address = 5;
   // number of used gas for processing request
