@@ -30,6 +30,8 @@ message LogRecord {
   bytes publicKey = 7;
   // session id
   bytes sessionId = 9;
+  // request id
+  string requestId = 10;
 }
 
 /*

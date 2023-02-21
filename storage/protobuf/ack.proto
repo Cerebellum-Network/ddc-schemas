@@ -16,6 +16,8 @@ message Ack {
   uint64 gas = 3;
   // nonce for avoiding ack duplicates
   bytes nonce = 4;
+  // request id for log record
+  string requestId = 5;
 }
 
 message AckRecord {
