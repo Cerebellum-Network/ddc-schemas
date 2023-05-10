@@ -33,6 +33,8 @@ message AckRecord {
   Signature signature = 4;
   // session id
   bytes sessionId = 5;
+  // list of chunk cIds, requested by client
+  repeated string chunks = 6;
 }
 
 /*
