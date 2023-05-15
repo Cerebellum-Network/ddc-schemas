@@ -63,6 +63,10 @@ message ReadRequest {
   string cid = 1;
   // bucket identifier of requested piece
   uint32 bucketId = 2;
+  // piece signature
+  Signature signature = 3;
+  // list of chunk cIds, requested by client
+  repeated string chunks = 4;
 }
 
 /*

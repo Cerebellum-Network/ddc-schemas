@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package pb;
 
+import "signature.proto";
+
 option go_package = "/pb";
 
 /*
@@ -27,6 +29,12 @@ message AckRecord {
   bytes publicKey = 2;
   // timestamp when record was saved in UNIX nanoseconds
   uint64 timestamp = 3  [jstype = JS_STRING];
+  // signature of acknowledgment data
+  Signature signature = 4;
+  // session id
+  bytes sessionId = 5;
+  // list of chunk cIds, requested by client
+  repeated string chunks = 6;
 }
 
 /*

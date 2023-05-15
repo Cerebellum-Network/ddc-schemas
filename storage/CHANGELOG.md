@@ -1,7 +1,7 @@
 ## Changelog
 
 ### vNext
-
+- Update Ask and Log records to v2, add chunk ids and signature
 ### v0.1.5
 - Added Log Record model for logging Activity Capture
 - Added Session Status model for Activity Capture
