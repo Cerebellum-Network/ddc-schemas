@@ -15,7 +15,7 @@ message FullState {
   // Short current node state
   ShortState state = 1;
   // Signature of the short state by current node
-  Signature signature = 2;
+  StateSignature signature = 2;
   // Node statistic
   Statistic statistic = 3;
   // Cluster map
@@ -67,7 +67,7 @@ message ShortState {
  */
 message GossipState  {
   ShortState last_state = 1;
-  Signature signature = 2;
+  StateSignature signature = 2;
   Statistic statistic = 3;
   map<uint32, Check> checks = 4;
 }
@@ -78,7 +78,7 @@ message GossipState  {
  */
 message Check {
   ShortState state = 1;
-  Signature signature = 2;
+  StateSignature signature = 2;
 }
 
 /*
@@ -118,7 +118,7 @@ message Check {
  * - Verify `sig` given the scheme, the message, and the public key.
  *
  */
-message Signature {
+message StateSignature {
   // The cryptographic signature in binary encoding as per the scheme.
   bytes value          = 1;
   // The public key of the signer in binary encoding as per the scheme.
