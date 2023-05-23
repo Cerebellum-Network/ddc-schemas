@@ -1,0 +1,164 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "/pb";
+
+/*
+ * Full State object used for two goals
+ * Routing optimization:
+ * User use this object to get information about cluster state and select the prioritised node for request
+ * Cluster state monitoring:
+ * Node use this object to get information about cluster state and check the state of other nodes
+ */
+message FullState {
+  // Short current node state
+  ShortState state = 1;
+  // Signature of the short state by current node
+  Signature signature = 2;
+  // Node statistic
+  Statistic statistic = 3;
+  // Cluster map
+  map<uint32, GossipState> cluster_map = 4;
+}
+
+
+/*
+ * Short state it's a short version of the state of the node.
+ * State it's a enum:
+ * NA - Not available (the node is not answering)
+ * Gray - Not ready (the node is not ready to work)
+ * Green - Ready (the node is ready to work in standard mode)
+ * Blue - Node is under load. Use alternative if it's possible
+ * Red - Node is under heavy load. Use alternative
+ */
+
+enum State {
+  NA = 0;
+  GRAY = 1;
+  GREEN = 2;
+  BLUE = 3;
+  RED = 4;
+}
+
+message ShortState {
+  // ID of the node from smart contract
+  uint32 nodeID = 1;
+  // ID of the cluster from smart contract
+  uint32 clusterID = 2;
+  // URL of the node
+  string url = 3;
+  // State of the node
+  State state = 4;
+  // Location of the node (Alpha2 country code)
+  string location = 5;
+  // Size of the node
+  uint32 size = 6;
+  // Updated_at time of the short state
+  uint64 updated = 7;
+}
+
+/*
+ * Each CDN node provide a full cluster state to other nodes and any client
+ * State bring short state (last updated state) and list of checks (who checks the state and what is the result)
+ * each check is signed by CDN node, that make them
+ * statistic is a last statistic state of CDN node, that needed for diagnostic only
+ * sign(CID(NodeID+ClusterID+URL+State+Location+Size+Updated_at))
+ */
+message GossipState  {
+  ShortState last_state = 1;
+  Signature signature = 2;
+  Statistic statistic = 3;
+  map<uint32, Check> checks = 4;
+}
+
+/*
+ * Signed check, that was produced by another CDN node
+ * and can be used to verify that the node works
+ */
+message Check {
+  ShortState state = 1;
+  Signature signature = 2;
+}
+
+/*
+ * A signature and details to help verify it.
+ *
+ * #### Generation
+ *
+ * - Take hash for the stat object
+ *     - The hash function should be blake2b-256 and `multiHashType` should be empty.
+ *     - Base encoded in Base32 with the prefix `b`
+ *     - Example:
+ * - Store the public key of the signer in `publicKey` in binary encoding.
+ *
+ * - Store the current time in `timestamp`
+ *     - In JavaScript: `timestamp = +new Date()`
+ *
+ * - Format the current time in ISO 8601 `YYYY-MM-DDTHH:mm:ss.sssZ`
+       - In JavaScript: `timeText = new Date(timestamp).toISOString()`
+       - In Go format: `2006-01-02T15:04:05.000Z`
+ *
+ * - The signed message to store a state is:
+ *     - `<Bytes>DDC CDN ${state_hash} at ${timeText}</Bytes>`
+ *     - Note: the `<Bytes>` added for same format as piece signature is.
+ *     - Example: `<Bytes>DDC CDN "Hash" at 2022-06-27T07:33:44.607Z</Bytes>`
+ *
+ * - It is normal, if time of signing is bigger from state timestamp.
+ * - The State hash is:
+ *     - Short state: `Hash = CID(NodeID+ClusterID+URL+State+Location+Size+Updated_at)`
+ * - The signing scheme should be sr25519, and `scheme` should be empty.
+ *     - If this not supported by a signer, then `scheme` should be "ed25519".
+ *
+ * - Sign and store the signature in `sig` in binary encoding.
+ *
+ * #### Verification
+ *
+ * - Recompute the signed message using the details in `signature`.
+ * - Verify `sig` given the scheme, the message, and the public key.
+ *
+ */
+message Signature {
+  // The cryptographic signature in binary encoding as per the scheme.
+  bytes value          = 1;
+  // The public key of the signer in binary encoding as per the scheme.
+  bytes signer         = 2;
+  // The name of the signature scheme (sr25519, secp256k1, ed25519).
+  // Default and recommended value: "" or "sr25519".
+  string scheme        = 3;
+  // The ID of the hashing algorithm as per multiformats/multihash.
+  // Default and recommended value: 0 or 0xb220, meaning blake2b-256.
+  uint64 multiHashType = 4;
+  // The timestamp in UNIX milliseconds.
+  uint64 timestamp     = 5;
+}
+
+/*
+ * Short statistic about node heals status
+ * Sessions - count of active sessions
+ * Redirects - count of redirects in current hour
+ * Cache_size - size of cache in bytes
+ * Cpu - cpu load in percents
+ * Ram - ram load in percents (regarding quotes)
+ * Hd - hard drive load in percents (regarding quotes)
+ * Uptime - uptime in seconds from last lunch
+ */
+message Statistic {
+  uint32 sessions = 1;
+  Redirects redirects = 2;
+  uint32 cache_size = 3;
+  uint32 cpu = 4;
+  uint32 ram = 5;
+  uint32 hd = 6;
+  int64 uptime = 7;
+}
+
+/*
+ * Soft redirects it is redirects thar recommended via header
+ * Hard redirects it is redirects that forced via http code
+ * Counted redirects on last hour
+ */
+message Redirects {
+  uint32 soft = 1;
+  uint32 hard = 2;
+}
