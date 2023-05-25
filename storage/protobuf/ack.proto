@@ -18,6 +18,8 @@ message Ack {
   bytes nonce = 4;
   // request id for log record
   string requestId = 5;
+  // The CID of the piece.
+  string cid  = 6;
   // session id
   bytes sessionId = 7;
   // signature of acknowledgment data
