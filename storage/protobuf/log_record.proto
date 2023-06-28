@@ -32,6 +32,8 @@ message LogRecord {
   bytes sessionId = 9;
   // request id
   string requestId = 10;
+  // list of pieces returned by request
+  repeated ResponsePiece responsePieces = 12;
 }
 
 /*
@@ -65,8 +67,6 @@ message ReadRequest {
   uint32 bucketId = 2;
   // piece signature
   Signature signature = 3;
-  // list of chunk cIds, requested by client
-  repeated string chunks = 4;
 }
 
 /*
@@ -75,4 +75,11 @@ message ReadRequest {
 message QueryRequest {
   // query for search
   Query query = 1;
+}
+
+message ResponsePiece {
+  // CID of piece
+  string cid = 1;
+  // size of piece
+  uint32 size = 3;
 }
