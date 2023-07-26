@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "/pb";
+
+/*
+ * CDN client's content consumption acknowledgment.
+ */
+message Ack {
+  string requestId = 1;
+  string cid = 2;
+  uint64 bytesReceived = 3;
+  uint64 userTimestamp = 4;
+  string nonce = 5;
+  string nodePublicKey = 6;
+  string userPublicKey = 7;
+  string signature = 8;
+}
+
+message AckRecord {
+  // acknowledgment data
+  Ack ack = 1;
+  // timestamp when record was saved in UNIX nanoseconds
+  uint64 timestamp = 2  [jstype = JS_STRING];
+}
+
+/*
+ * An ack records list.
+ */
+message AckRecordList {
+  repeated AckRecord ackRecords = 1;
+}
+
+/*
+ * CDN node content serving log.
+ */
+message Log {
+  string requestId = 1;
+  string cid = 2;
+  uint32 type = 3;
+  string sessionId = 4;
+  string userPublicKey = 5;
+  uint32 era = 6;
+  string userAddress = 7;
+  uint64 bytesSent = 8;
+  uint64 timestamp = 9;
+  string nodePublicKey = 10;
+  string signature = 11;
+  uint64 bucketId = 12;
+}
+
+message LogRecord {
+  // log data
+  Log log = 1;
+  // timestamp when record was saved in UNIX nanoseconds
+  uint64 timestamp = 2  [jstype = JS_STRING];
+}
+
+/*
+ * A log records list.
+ */
+message LogRecordList {
+  repeated LogRecord logRecords = 1;
+}
