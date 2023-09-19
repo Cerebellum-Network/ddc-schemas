@@ -22,4 +22,6 @@ message Request {
   uint64 multiHashType = 6;
   // Session Id
   bytes sessionId = 7;
+  // Request ID
+  bytes requestId = 8;
 }
