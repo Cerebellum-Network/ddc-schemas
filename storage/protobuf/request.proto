@@ -23,5 +23,5 @@ message Request {
   // Session Id
   bytes sessionId = 7;
   // Request ID
-  bytes requestId = 8;
+  string requestId = 8;
 }
