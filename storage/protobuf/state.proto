@@ -42,8 +42,8 @@ enum State {
 }
 
 message ShortState {
-  // ID of the node from smart contract
-  uint32 nodeID = 1;
+  // PubKey of the node from smart contract
+  string nodeKey = 1;
   // ID of the cluster from smart contract
   uint32 clusterID = 2;
   // URL of the node
@@ -63,7 +63,7 @@ message ShortState {
  * State bring short state (last updated state) and list of checks (who checks the state and what is the result)
  * each check is signed by CDN node, that make them
  * statistic is a last statistic state of CDN node, that needed for diagnostic only
- * sign(CID(NodeID+ClusterID+URL+State+Location+Size+Updated_at))
+ * sign(CID(nodeKey+ClusterID+URL+State+Location+Size+Updated_at))
  */
 message GossipState  {
   ShortState last_state = 1;
@@ -106,7 +106,7 @@ message Check {
  *
  * - It is normal, if time of signing is bigger from state timestamp.
  * - The State hash is:
- *     - Short state: `Hash = CID(NodeID+ClusterID+URL+State+Location+Size+Updated_at)`
+ *     - Short state: `Hash = CID(nodeKey+ClusterID+URL+State+Location+Size+Updated_at)`
  * - The signing scheme should be sr25519, and `scheme` should be empty.
  *     - If this not supported by a signer, then `scheme` should be "ed25519".
  *
