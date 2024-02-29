@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dag;
 
-option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/dag";
+option go_package = "github.com/ddc-schemas/storage/api/dag";
 
 service DagApi {
   rpc Put(PutRequest) returns (PutResponse) {}

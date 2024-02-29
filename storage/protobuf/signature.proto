@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/common";
+option go_package = "github.com/ddc-schemas/storage/api/common";
 
 message Signature {
   Algorithm algorithm = 1;

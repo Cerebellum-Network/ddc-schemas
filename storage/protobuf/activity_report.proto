@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package activity_report;
 
-option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/activity_report";
+option go_package = "github.com/ddc-schemas/storage/api/activity_report";
 
 import "storage/protobuf/auth_token.proto";
 import "storage/protobuf/signature.proto";
