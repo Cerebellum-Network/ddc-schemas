@@ -1,6 +1,8 @@
 ## Changelog
 
 ### vNext
+
+### v0.1.6-alpha.1
 - Add node state contract
 - Update Ask and Log records to v2, add chunk ids and signature
 - Added `Request.requestId`
