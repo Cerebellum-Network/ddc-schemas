@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package activity_report;
+
+option go_package = "github.com/ddc-schemas/storage/api/activity_report";
+
+import "storage/protobuf/activity_report.proto";
+
+service ActivityReportApi {
+  rpc readRecords(ReadRecordsRequest) returns (ReadRecordsResponse) {}
+  rpc getStreamPosition(GetStreamPositionRequest) returns (GetStreamPositionResponse) {}
+}
+
+message ReadRecordsRequest {
+  uint64 nRecords = 1; // max number of records to fetch
+  uint64 firstPositionToRead = 2; // first non-consumed position
+  uint64 timestamp = 3;
+}
+
+message ReadRecordsResponse {
+  repeated activity_report.ActivityRecord records = 1; // type is intentionally generic for now
+}
+
+message GetStreamPositionRequest {
+  uint64 timestamp = 1;
+}
+
+message GetStreamPositionResponse {
+  uint64 position = 1;
+}
