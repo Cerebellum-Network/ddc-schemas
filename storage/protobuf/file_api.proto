@@ -4,7 +4,7 @@ package file;
 
 option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/file";
 
-import "api/activity_report.proto";
+import "storage/protobuf/activity_report.proto";
 
 service FileApi {
   rpc putRawPiece(stream PutRawPieceRequest) returns (PutRawPieceResponse) {}

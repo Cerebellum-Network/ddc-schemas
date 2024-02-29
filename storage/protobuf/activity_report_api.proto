@@ -4,7 +4,7 @@ package activity_report;
 
 option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/activity_report";
 
-import "api/activity_report.proto";
+import "storage/protobuf/activity_report.proto";
 
 service ActivityReportApi {
   rpc readRecords(ReadRecordsRequest) returns (ReadRecordsResponse) {}

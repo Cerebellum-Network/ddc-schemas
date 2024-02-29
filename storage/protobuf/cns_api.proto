@@ -4,7 +4,7 @@ package cns;
 
 option go_package = "cere.network/ddc-storage-node/pkg/grpc/api/cns";
 
-import "api/signature.proto";
+import "storage/protobuf/signature.proto";
 
 service CnsApi {
   rpc Put(PutRequest) returns (PutResponse) {}
