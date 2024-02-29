@@ -1,6 +1,7 @@
 ## Changelog
 
 ### vNext
+- Add latest ddc-storage-node API protobuf files.
 
 ### v0.1.6-alpha.1
 - Add node state contract
